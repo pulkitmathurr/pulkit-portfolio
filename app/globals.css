@@ -1,26 +1,203 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #0a0a0a;
+  --color-ink-2: #121212;
+  --color-paper: #f0ece4;
+  --color-muted: #8f8a82;
+  --color-accent: #c0392b;
+  --color-line: rgb(240 236 228 / 0.12);
+
+  --font-display: var(--font-bebas), "Impact", sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Lenis ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* ---------- Custom cursor ---------- */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+
+/* ---------- Intro loader (shown only when <html data-intro="1">) ---------- */
+.intro {
+  display: none;
+}
+html[data-intro="1"] .intro,
+html[data-intro="out"] .intro {
+  display: flex;
+}
+html[data-intro="out"] .intro {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+html[data-intro="1"] body {
+  overflow: hidden;
+}
+.intro-num {
+  opacity: 0;
+  animation: intro-num 0.42s steps(1, end) forwards;
+}
+.intro-num:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.intro-num:nth-child(2) {
+  animation-delay: 0.47s;
+}
+.intro-num:nth-child(3) {
+  animation-delay: 0.89s;
+}
+@keyframes intro-num {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.intro-sweep {
+  animation: intro-sweep 0.42s linear 3 0.05s both;
+}
+@keyframes intro-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.intro-flicker {
+  animation: intro-flicker 1.4s steps(12) both;
+}
+@keyframes intro-flicker {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  20% {
+    opacity: 0.55;
+  }
+  45% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.6;
+  }
+}
+
+/* ---------- Film grain ---------- */
+.grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 0.8s steps(6) infinite;
+}
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-3%, 2%);
+  }
+  40% {
+    transform: translate(2%, -4%);
+  }
+  60% {
+    transform: translate(-4%, -1%);
+  }
+  80% {
+    transform: translate(3%, 3%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+.marquee[data-reverse] {
+  animation-direction: reverse;
+}
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ---------- Lightbox buttons ---------- */
+@layer components {
+.lb-btn {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-line);
+  color: var(--color-paper);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.lb-btn:hover {
+  border-color: var(--color-paper);
+  background: rgb(240 236 228 / 0.08);
+}
+}
+
+/* ---------- Utilities ---------- */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .marquee {
+    animation: none;
+  }
+  html[data-intro="1"] .intro {
+    display: none;
+  }
 }
