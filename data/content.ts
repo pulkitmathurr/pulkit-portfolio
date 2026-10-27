@@ -81,29 +81,15 @@ export const videos: Video[] = [
     id: "raakh",
     title: "RAAKH",
     type: "Folklore Horror Short (Trailer)",
-    duration: "[PLACEHOLDER] 1:00",
+    duration: "1:38",
     tagline: "An Indian folklore horror story set around Dussehra.",
     description:
       "An original Indian folklore horror story set around Dussehra, cut as a trailer and carried by an old-man narrator voice-over. Minimal characters and two locations, built for atmosphere and dread.",
     thumbnail: "/thumbs/raakh.jpg",
-    previewSrc: "", // [PLACEHOLDER] e.g. "/videos/raakh-preview.mp4"
-    url: "", // [PLACEHOLDER] RAAKH-LINK (YouTube or Vimeo)
+    previewSrc: "/videos/raakh-preview.mp4",
+    src: "/videos/raakh.mp4",
     tools: ["Google Gemini (Veo)", "CapCut"],
     roles: ["Script", "Shot planning", "Prompts", "Generation", "Edit", "Voice-over", "Sound"],
-  },
-  {
-    id: "diamond",
-    title: "[PLACEHOLDER] DIAMOND",
-    type: "Realistic Message Short",
-    duration: "~50 sec",
-    tagline: "A man digging for diamonds gets lost in his phone.",
-    description:
-      "A realistic short: a man digging in a diamond cave gets distracted by phone scrolling and walks away from what he came for. A short, direct “stop being distracted” message.",
-    thumbnail: "/thumbs/diamond.jpg",
-    previewSrc: "", // [PLACEHOLDER] e.g. "/videos/diamond-preview.mp4"
-    url: "", // [PLACEHOLDER] DIAMOND-LINK (YouTube or Vimeo)
-    tools: ["Google Gemini (Veo)", "CapCut"],
-    roles: ["Script", "Prompts", "Generation", "Edit", "Sound"],
   },
   {
     id: "disapple",
@@ -120,15 +106,16 @@ export const videos: Video[] = [
     roles: ["Script", "Prompts", "Generation", "Edit", "Sound"], // [PLACEHOLDER] confirm your roles
   },
   {
-    id: "coming-soon",
-    title: "Next Project",
-    type: "In production",
-    duration: "Soon",
-    tagline: "Something new is being generated.",
-    description: "",
-    thumbnail: "/thumbs/coming-soon.jpg",
-    tools: [],
-    roles: [],
+    id: "diamond",
+    title: "DIAMOND",
+    type: "Realistic Message Short",
+    duration: "~50 sec",
+    tagline: "A man digging for diamonds gets lost in his phone.",
+    description:
+      "A realistic short: a man digging in a diamond cave gets distracted by phone scrolling and walks away from what he came for. A short, direct “stop being distracted” message.",
+    thumbnail: "/thumbs/diamond.jpg",
+    tools: ["Google Gemini (Veo)", "CapCut"],
+    roles: ["Script", "Prompts", "Generation", "Edit", "Sound"],
     comingSoon: true,
   },
 ];

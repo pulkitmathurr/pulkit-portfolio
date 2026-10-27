@@ -75,7 +75,7 @@ export function VideoCard({ video, index, onOpen }: Props) {
               <rect x="5" y="11" width="14" height="10" rx="1" />
               <path d="M8 11V8a4 4 0 0 1 8 0v3" />
             </svg>
-            <span className="font-display text-2xl tracking-widest text-paper/90">Coming soon</span>
+            <span className="rounded-full border border-paper/40 bg-black/60 px-5 py-2 font-mono text-xs tracking-[0.25em] text-paper uppercase backdrop-blur-sm">Coming soon</span>
           </div>
         ) : (
           <span className="absolute bottom-3 left-3 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-paper shadow-lg transition group-hover:scale-110 md:opacity-0 md:group-hover:opacity-100">
