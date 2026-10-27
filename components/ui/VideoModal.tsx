@@ -68,6 +68,16 @@ export function VideoModal({ video, onClose }: Props) {
                 allowFullScreen
                 loading="lazy"
               />
+            ) : video.src ? (
+              <video
+                src={video.src}
+                poster={video.thumbnail}
+                title={video.title}
+                className="absolute inset-0 h-full w-full"
+                controls
+                autoPlay
+                playsInline
+              />
             ) : (
               <>
                 <Image src={video.thumbnail} alt="" fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover" />

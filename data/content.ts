@@ -25,6 +25,8 @@ export type Video = {
   previewSrc?: string;
   /** YouTube or Vimeo link (normal watch URL is fine; it is converted to an embed URL) */
   url?: string;
+  /** Self-hosted MP4 in /public, played in the modal when there is no url */
+  src?: string;
   tools: string[];
   roles: Role[];
   /** Shows a locked / blurred "Coming soon" card */
@@ -40,6 +42,8 @@ export type CharacterSheet = {
   image: string;
   width: number;
   height: number;
+  /** Optional extra shots of the same character, browsable in the lightbox */
+  views?: { label: string; image: string; width: number; height: number }[];
 };
 
 export const site = {
@@ -100,6 +104,20 @@ export const videos: Video[] = [
     url: "", // [PLACEHOLDER] DIAMOND-LINK (YouTube or Vimeo)
     tools: ["Google Gemini (Veo)", "CapCut"],
     roles: ["Script", "Prompts", "Generation", "Edit", "Sound"],
+  },
+  {
+    id: "disapple",
+    title: "DISAPPLE",
+    type: "Advertisement",
+    duration: "0:44",
+    tagline: "A skydiving ad, from the plane door to the open sky.",
+    description:
+      "An AI-generated advertisement following a skydiver from the open door of the plane, through freefall over patchwork fields, to the canopy opening at sunset.",
+    thumbnail: "/thumbs/disapple.jpg",
+    previewSrc: "/videos/disapple-preview.mp4",
+    src: "/videos/disapple.mp4",
+    tools: ["Google Gemini (Veo)", "CapCut"], // [PLACEHOLDER] confirm the tools used
+    roles: ["Script", "Prompts", "Generation", "Edit", "Sound"], // [PLACEHOLDER] confirm your roles
   },
   {
     id: "coming-soon",
@@ -177,13 +195,98 @@ export const characters: CharacterSheet[] = [
     height: 1500,
   },
   {
-    id: "placeholder-5",
-    name: "[PLACEHOLDER] Character 05",
-    project: "Upcoming",
-    note: "Next character sheet goes here.",
-    image: "/characters/placeholder-5.jpg",
-    width: 1200,
-    height: 1500,
+    id: "preet",
+    name: "Preet",
+    project: "Original",
+    note: "One face, locked across every angle.",
+    image: "/characters/preet/4.jpg",
+    width: 961,
+    height: 765,
+    views: [
+      { label: "Front", image: "/characters/preet/4.jpg", width: 961, height: 765 },
+      { label: "Full body", image: "/characters/preet/1.jpg", width: 704, height: 766 },
+      { label: "Three-quarter", image: "/characters/preet/2.jpg", width: 922, height: 760 },
+      { label: "Profile", image: "/characters/preet/3.jpg", width: 772, height: 760 },
+    ],
+  },
+  {
+    id: "mahi",
+    name: "Mahi",
+    project: "Original",
+    note: "Same face and outfit from every side.",
+    image: "/characters/mahi/3.jpg",
+    width: 863,
+    height: 766,
+    views: [
+      { label: "Front", image: "/characters/mahi/3.jpg", width: 863, height: 766 },
+      { label: "Full body", image: "/characters/mahi/1.jpg", width: 752, height: 765 },
+      { label: "Three-quarter", image: "/characters/mahi/4.jpg", width: 861, height: 758 },
+      { label: "Profile", image: "/characters/mahi/2.jpg", width: 843, height: 766 },
+    ],
+  },
+  {
+    id: "postman",
+    name: "The Postman",
+    project: "Original",
+    note: "Front, side and back: same jacket, bag and boots.",
+    image: "/characters/postman/cover.jpg",
+    width: 700,
+    height: 875,
+    views: [
+      { label: "Sheet", image: "/characters/postman/sheet.jpg", width: 2429, height: 1532 },
+      { label: "Front", image: "/characters/postman/front.jpg", width: 680, height: 1532 },
+      { label: "Side", image: "/characters/postman/side.jpg", width: 600, height: 1532 },
+      { label: "Back", image: "/characters/postman/back.jpg", width: 669, height: 1532 },
+    ],
+  },
+  {
+    id: "raghu",
+    name: "Raghu",
+    project: "RAAKH",
+    note: "Four angles and close-ups, same worn kurta.",
+    image: "/characters/raghu/cover.jpg",
+    width: 340,
+    height: 288,
+    views: [
+      { label: "Sheet", image: "/characters/raghu/sheet.jpg", width: 1376, height: 768 },
+      { label: "Front", image: "/characters/raghu/front.jpg", width: 340, height: 465 },
+      { label: "Three-quarter", image: "/characters/raghu/three-quarter.jpg", width: 310, height: 465 },
+      { label: "Side", image: "/characters/raghu/side.jpg", width: 270, height: 465 },
+      { label: "Back", image: "/characters/raghu/back.jpg", width: 310, height: 465 },
+    ],
+  },
+  {
+    id: "raghu-raavan",
+    name: "Raghu in Raavan Makeup",
+    project: "RAAKH",
+    note: "The same face under Raavan's makeup and costume.",
+    image: "/characters/raghu-raavan/cover.jpg",
+    width: 340,
+    height: 288,
+    views: [
+      { label: "Sheet", image: "/characters/raghu-raavan/sheet.jpg", width: 1376, height: 768 },
+      { label: "Front", image: "/characters/raghu-raavan/front.jpg", width: 340, height: 465 },
+      { label: "Three-quarter", image: "/characters/raghu-raavan/three-quarter.jpg", width: 310, height: 465 },
+      { label: "Side", image: "/characters/raghu-raavan/side.jpg", width: 270, height: 465 },
+      { label: "Back", image: "/characters/raghu-raavan/back.jpg", width: 310, height: 465 },
+    ],
+  },
+  {
+    id: "skydiver",
+    name: "The Skydiver",
+    project: "DISAPPLE",
+    note: "Same suit, helmet and goggles from the plane door to the canopy.",
+    image: "/characters/skydiver/cover.jpg",
+    width: 796,
+    height: 763,
+    views: [
+      { label: "Sheet", image: "/characters/skydiver/sheet.jpg", width: 2752, height: 1536 },
+      { label: "Front", image: "/characters/skydiver/front.jpg", width: 747, height: 1536 },
+      { label: "Back", image: "/characters/skydiver/back.jpg", width: 698, height: 1536 },
+      { label: "Side", image: "/characters/skydiver/side.jpg", width: 501, height: 1536 },
+      { label: "Helmet", image: "/characters/skydiver/helmet.jpg", width: 796, height: 763 },
+      { label: "Close-up", image: "/characters/skydiver/goggles.jpg", width: 796, height: 763 },
+    ],
   },
 ];
 

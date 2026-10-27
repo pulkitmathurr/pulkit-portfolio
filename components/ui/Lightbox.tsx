@@ -23,6 +23,8 @@ export function Lightbox({ items, index, onIndex, onClose }: Props) {
   const item = items[index];
   const stage = useRef<HTMLDivElement>(null);
   const [view, setView] = useState({ scale: 1, x: 0, y: 0 });
+  const [shot, setShot] = useState(0);
+  const current = item.views?.[shot] ?? item;
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const pinch = useRef<{ dist: number; scale: number } | null>(null);
   const drag = useRef<{ x: number; y: number; vx: number; vy: number } | null>(null);
@@ -38,6 +40,7 @@ export function Lightbox({ items, index, onIndex, onClose }: Props) {
   const go = useCallback(
     (dir: number) => {
       setView({ scale: 1, x: 0, y: 0 });
+      setShot(0);
       onIndex((index + dir + items.length) % items.length);
     },
     [index, items.length, onIndex],
@@ -162,9 +165,32 @@ export function Lightbox({ items, index, onIndex, onClose }: Props) {
           className="absolute inset-4 transition-transform duration-75 ease-out md:inset-8"
           style={{ transform: `scale(${view.scale}) translate(${view.x}px, ${view.y}px)` }}
         >
-          <Image key={item.id} src={item.image} alt={`${item.name}: ${item.note}`} fill sizes="100vw" quality={90} className="object-contain" draggable={false} />
+          <Image key={current.image} src={current.image} alt={`${item.name}: ${item.note}`} fill sizes="100vw" quality={90} className="object-contain" draggable={false} />
         </div>
       </div>
+
+      {item.views ? (
+        <div className="no-scrollbar flex justify-center gap-2 overflow-x-auto border-t border-line px-4 py-3">
+          {item.views.map((v, i) => (
+            <button
+              key={v.image}
+              type="button"
+              onClick={() => {
+                setView({ scale: 1, x: 0, y: 0 });
+                setShot(i);
+              }}
+              className={`shrink-0 text-center transition-opacity ${i === shot ? "opacity-100" : "opacity-50 hover:opacity-80"}`}
+              aria-label={`${item.name}, ${v.label}`}
+              aria-pressed={i === shot}
+            >
+              <span className={`relative block h-14 w-14 overflow-hidden border ${i === shot ? "border-accent" : "border-line"}`}>
+                <Image src={v.image} alt="" fill sizes="56px" className="object-cover" draggable={false} />
+              </span>
+              <span className="mt-1 block font-mono text-[9px] tracking-wider text-muted uppercase">{v.label}</span>
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       <div className="flex items-center justify-between border-t border-line px-4 py-3 md:px-6">
         <button type="button" onClick={() => go(-1)} className="lb-btn !w-auto px-4 font-mono text-xs tracking-widest">
