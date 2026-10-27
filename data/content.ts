@@ -54,8 +54,8 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/pulkit-mathur-6858453a0/",
   // [PLACEHOLDER] your developer portfolio URL
   devPortfolio: "#",
-  // Drop your resume at /public/resume.pdf
-  resume: "/resume.pdf",
+  // Resume PDF in /public
+  resume: "/Pulkit_Mathur_Resume.pdf",
   // [PLACEHOLDER] your final domain (used for SEO / Open Graph links)
   url: "https://pulkit-mathur.vercel.app",
   seo: {
